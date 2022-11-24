@@ -16,7 +16,12 @@ public class CourseRepository {
         this.entityManager = entityManager;
     }
 
-    public Course findById(int id) {
+    public Course findById(Integer id) {
         return entityManager.find(Course.class, id);
+    }
+
+    public void deleteById(Integer id) {
+        Course course = findById(id);
+        entityManager.remove(course);
     }
 }
