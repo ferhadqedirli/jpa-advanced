@@ -25,6 +25,11 @@ class StudentRepositoryTest {
     EntityManager em;
 
     @Test
+    void someTest() {
+        repository.someOperationToUnderstandPersistenceContext();
+    }
+
+    @Test
     @Transactional
     void retrieve_student_and_passport_details() {
         Student student = em.find(Student.class, 2);
@@ -33,8 +38,11 @@ class StudentRepositoryTest {
     }
 
     @Test
-    void someTest() {
-        repository.someOperationToUnderstandPersistenceContext();
+    @Transactional
+    void retrieve_passport_and_associated_student() {
+        Passport passport = em.find(Passport.class, 40001);
+        logger.info("passport -> {}", passport);
+        logger.info("student -> {}", passport.getStudent());
     }
 
 }
