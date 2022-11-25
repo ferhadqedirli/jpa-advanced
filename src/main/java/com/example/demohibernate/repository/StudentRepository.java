@@ -43,4 +43,22 @@ public class StudentRepository {
         student.setPassport(passport);
         entityManager.persist(student);
     }
+
+    public void someOperationToUnderstandPersistenceContext() {
+        //Database operation 1 - Retrieve Student
+        Student student = entityManager.find(Student.class, 2);
+        //Persistence Context(student)
+
+        //Database operation 2 - Retrieve Passport
+        Passport passport = student.getPassport();
+        //Persistence Context(student, passport)
+
+        //Database operation 3 - Update Passport
+        passport.setNumber("AE7412589");
+        //Persistence Context(student, passport++)
+
+        //Database operation 4 - Update Student
+        student.setName("Tony Shelby");
+        //Persistence Context(student++, passport++)
+    }
 }

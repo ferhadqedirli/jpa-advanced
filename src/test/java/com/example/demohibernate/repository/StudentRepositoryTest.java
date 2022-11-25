@@ -1,6 +1,7 @@
 package com.example.demohibernate.repository;
 
 import com.example.demohibernate.DemoHibernateApplication;
+import com.example.demohibernate.entity.Passport;
 import com.example.demohibernate.entity.Student;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -29,6 +30,11 @@ class StudentRepositoryTest {
         Student student = em.find(Student.class, 2);
         logger.info("student -> {}", student);
         logger.info("passport -> {}", student.getPassport());
+    }
+
+    @Test
+    void someTest() {
+        repository.someOperationToUnderstandPersistenceContext();
     }
 
 }
