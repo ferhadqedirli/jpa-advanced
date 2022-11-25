@@ -23,7 +23,7 @@ class CourseRepositoryTest {
     void findById_basic() {
         Course course = repository.findById(10001);
         assertNotNull(course);
-        assertEquals("JPA in 50 steps", course.getName());
+        assertEquals("Jpa in 50 steps", course.getName());
     }
 
     @Test
@@ -31,5 +31,21 @@ class CourseRepositoryTest {
     void deleteById_basic() {
         repository.deleteById(10001);
         assertNull(repository.findById(10001));
+    }
+
+    @Test
+    @DirtiesContext//reset data after testing
+    void save_basic() {
+        //get a course
+        Course course = repository.findById(10001);
+        assertEquals("Jpa in 50 steps", course.getName());
+
+        //update details
+        course.setName("JPA in 50 steps - Updated");
+        repository.save(course);
+
+        //check the value
+        Course course1 = repository.findById(10001);
+        assertEquals("JPA in 50 steps - Updated", course1.getName());
     }
 }
