@@ -23,7 +23,7 @@ class CourseRepositoryTest {
     void findById_basic() {
         Course course = repository.findById(10001);
         assertNotNull(course);
-        assertEquals("Jpa in 50 steps", course.getName());
+        assertEquals("JPA in 50 steps", course.getName());
     }
 
     @Test
@@ -38,7 +38,7 @@ class CourseRepositoryTest {
     void save_basic() {
         //get a course
         Course course = repository.findById(10001);
-        assertEquals("Jpa in 50 steps", course.getName());
+        assertEquals("JPA in 50 steps", course.getName());
 
         //update details
         course.setName("JPA in 50 steps - Updated");
