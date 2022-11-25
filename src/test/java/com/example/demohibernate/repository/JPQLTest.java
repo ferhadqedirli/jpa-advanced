@@ -27,21 +27,21 @@ class JPQLTest {
 
     @Test
     void jpql_basic() {
-        Query query = em.createQuery("select c from Course c");
+        Query query = em.createNamedQuery("query_get_all_courses");
         List resultList = query.getResultList();
         logger.info("select c from course c -> {}", resultList);
     }
 
     @Test
     void jpql_typed() {
-        TypedQuery<Course> query = em.createQuery("select c from Course c", Course.class);
+        TypedQuery<Course> query = em.createNamedQuery("query_get_all_courses", Course.class);
         List<Course> resultList = query.getResultList();
         logger.info("select c from course c -> {}", resultList);
     }
 
     @Test
     void jpql_where() {
-        TypedQuery<Course> query = em.createQuery("select c from Course c where c.name like '%100 Steps'", Course.class);
+        TypedQuery<Course> query = em.createNamedQuery("query_get_100_step_courses", Course.class);
         List<Course> resultList = query.getResultList();
         logger.info("select c from Course c where c.name like '%100 Steps' -> {}", resultList);
     }
