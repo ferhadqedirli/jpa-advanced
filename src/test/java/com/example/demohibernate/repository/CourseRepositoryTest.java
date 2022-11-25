@@ -48,4 +48,8 @@ class CourseRepositoryTest {
         Course course1 = repository.findById(10001);
         assertEquals("JPA in 50 steps - Updated", course1.getName());
     }
+
+    void playWithEntityManager() {
+        repository.playWithEntityManager();
+    }
 }
