@@ -1,9 +1,6 @@
 package com.example.demohibernate.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "course")
@@ -12,6 +9,7 @@ public class Course {
     @GeneratedValue
     private Integer id;
 
+    @Column(name = "name", nullable = false)
     private String name;
 
     protected Course() {
