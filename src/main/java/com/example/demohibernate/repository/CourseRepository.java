@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -46,7 +47,7 @@ public class CourseRepository {
         course1.setName("JPA in 50 Steps - Updated");
     }
 
-    public void addReviewsForCourse() {
+    public void addHardcodedReviewsForCourse() {
         Course course = findById(10003);
         logger.info("Reviews -> {}", course.getReviews());
         Review review1 = new Review("5", "Great Hands-on Stuff.");
@@ -60,5 +61,17 @@ public class CourseRepository {
 
         entityManager.persist(review1);
         entityManager.persist(review2);
+    }
+
+    public void addReviewsForCourse(Integer courseId, List<Review> reviews) {
+        Course course = findById(courseId);
+        logger.info("Reviews -> {}", course.getReviews());
+
+        for (Review review : reviews) {
+            course.addReview(review);
+            review.setCourse(course);
+
+            entityManager.persist(review);
+        }
     }
 }
