@@ -1,6 +1,9 @@
 package com.example.demohibernate.repository;
 
 import com.example.demohibernate.entity.Course;
+import com.example.demohibernate.entity.Review;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -11,6 +14,7 @@ import javax.transaction.Transactional;
 public class CourseRepository {
 
     private final EntityManager entityManager;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public CourseRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
@@ -40,5 +44,21 @@ public class CourseRepository {
 
         Course course1 = findById(10001);
         course1.setName("JPA in 50 Steps - Updated");
+    }
+
+    public void addReviewsForCourse() {
+        Course course = findById(10003);
+        logger.info("Reviews -> {}", course.getReviews());
+        Review review1 = new Review("5", "Great Hands-on Stuff.");
+        Review review2 = new Review("5", "Hatsoff.");
+
+        course.addReview(review1);
+        review1.setCourse(course);
+
+        course.addReview(review2);
+        review2.setCourse(course);
+
+        entityManager.persist(review1);
+        entityManager.persist(review2);
     }
 }
