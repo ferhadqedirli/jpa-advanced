@@ -31,7 +31,7 @@ public class Course {
     @OneToMany(mappedBy = "course")
     private final List<Review> reviews = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "courses")
     private final List<Student> students = new ArrayList<>();
 
     protected Course() {
