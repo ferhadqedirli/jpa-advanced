@@ -6,7 +6,7 @@ import javax.persistence.*;
 @NamedQueries(value = {
         @NamedQuery(name = "get_all_employee", query = "select e from Employee e")
 })
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Employee {
     @Id
     @GeneratedValue
