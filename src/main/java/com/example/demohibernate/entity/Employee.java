@@ -3,6 +3,9 @@ package com.example.demohibernate.entity;
 import javax.persistence.*;
 
 @Entity
+//@NamedQueries(value = {
+//        @NamedQuery(name = "get-all_employee", query = "select e from Employee e")
+//})
 public abstract class Employee {
     @Id
     @GeneratedValue
