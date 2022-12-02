@@ -1,8 +1,10 @@
 package com.example.demohibernate.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQuery(name = "get_all_full_time_employee", query = "select fe from FullTimeEmployee fe")
 public class FullTimeEmployee extends Employee{
     private Double salary;
 

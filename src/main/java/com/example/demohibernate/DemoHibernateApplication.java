@@ -45,6 +45,7 @@ public class DemoHibernateApplication implements CommandLineRunner {
 //                new Passport("AJ8554547"));
         employeeRepository.insertEmployee(new FullTimeEmployee("Jack", 1000d));
         employeeRepository.insertEmployee(new PartTimeEmployee("Jill", 50d));
-        logger.info("employees -> {}", employeeRepository.retrieveAllEmployee());
+        logger.info("part time employees -> {}", employeeRepository.retrieveAllPFullTimeEmployee());
+        logger.info("full time employees -> {}", employeeRepository.retrieveAllPartTimeEmployee());
     }
 }

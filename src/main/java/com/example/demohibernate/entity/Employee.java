@@ -2,11 +2,12 @@ package com.example.demohibernate.entity;
 
 import javax.persistence.*;
 
-@Entity
-@NamedQueries(value = {
-        @NamedQuery(name = "get_all_employee", query = "select e from Employee e")
-})
-@Inheritance(strategy = InheritanceType.JOINED)
+//@Entity
+//@NamedQueries(value = {
+//        @NamedQuery(name = "get_all_employee", query = "select e from Employee e")
+//})
+//@Inheritance(strategy = InheritanceType.JOINED)
+@MappedSuperclass
 public abstract class Employee {
     @Id
     @GeneratedValue
