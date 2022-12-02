@@ -3,9 +3,11 @@ package com.example.demohibernate.entity;
 import javax.persistence.*;
 
 @Entity
-//@NamedQueries(value = {
-//        @NamedQuery(name = "get-all_employee", query = "select e from Employee e")
-//})
+@NamedQueries(value = {
+        @NamedQuery(name = "get_all_employee", query = "select e from Employee e")
+})
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "employee_type")
 public abstract class Employee {
     @Id
     @GeneratedValue
