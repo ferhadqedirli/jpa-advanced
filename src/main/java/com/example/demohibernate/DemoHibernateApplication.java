@@ -1,6 +1,9 @@
 package com.example.demohibernate;
 
+import com.example.demohibernate.entity.Course;
+import com.example.demohibernate.entity.Passport;
 import com.example.demohibernate.entity.Review;
+import com.example.demohibernate.entity.Student;
 import com.example.demohibernate.repository.CourseRepository;
 import com.example.demohibernate.repository.StudentRepository;
 import org.slf4j.Logger;
@@ -32,10 +35,14 @@ public class DemoHibernateApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
 //        studentRepository.saveStudentWithPassport();
 //        courseRepository.addHardcodedReviewsForCourse();
-        List<Review> reviews = new ArrayList<>();
-        reviews.add(new Review("5", "Great Hands-on Stuff."));
-        reviews.add(new Review("5", "Hatsoff."));
-
-        courseRepository.addReviewsForCourse(10003, reviews);
+//        List<Review> reviews = new ArrayList<>();
+//        reviews.add(new Review("5", "Great Hands-on Stuff."));
+//        reviews.add(new Review("5", "Hatsoff."));
+//
+//        courseRepository.addReviewsForCourse(10003, reviews);
+//        studentRepository.insertHardcodedStudentAndCourse();
+        studentRepository.insertStudentAndCourse(new Student("Jack"),
+                new Course("Microservices in 100 Steps"),
+                new Passport("AJ8554547"));
     }
 }

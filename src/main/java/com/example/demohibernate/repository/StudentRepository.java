@@ -1,5 +1,6 @@
 package com.example.demohibernate.repository;
 
+import com.example.demohibernate.entity.Course;
 import com.example.demohibernate.entity.Passport;
 import com.example.demohibernate.entity.Student;
 import org.springframework.stereotype.Repository;
@@ -60,5 +61,30 @@ public class StudentRepository {
         //Database operation 4 - Update Student
         student.setName("Tony Shelby");
         //Persistence Context(student++, passport++)
+    }
+
+    public void insertHardcodedStudentAndCourse() {
+        Student student = new Student("Jack");
+        entityManager.persist(student);
+        Passport passport = new Passport("AJ7884514");
+        entityManager.persist(passport);
+        Course course = new Course("Microservices in 100 Steps");
+        entityManager.persist(course);
+
+        student.addCourse(course);
+        course.addStudent(student);
+        student.setPassport(passport);
+        entityManager.persist(student);
+    }
+
+    public void insertStudentAndCourse(Student student, Course course, Passport passport) {
+        entityManager.persist(passport);
+
+        student.addCourse(course);
+        student.setPassport(passport);
+        course.addStudent(student);
+
+        entityManager.persist(course);
+        entityManager.persist(student);
     }
 }
