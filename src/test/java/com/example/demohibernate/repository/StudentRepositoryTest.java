@@ -1,6 +1,7 @@
 package com.example.demohibernate.repository;
 
 import com.example.demohibernate.DemoHibernateApplication;
+import com.example.demohibernate.entity.Course;
 import com.example.demohibernate.entity.Passport;
 import com.example.demohibernate.entity.Student;
 import org.junit.jupiter.api.Test;
@@ -32,7 +33,7 @@ class StudentRepositoryTest {
     @Test
     @Transactional
     void retrieve_student_and_passport_details() {
-        Student student = em.find(Student.class, 2);
+        Student student = em.find(Student.class, 20002);
         logger.info("student -> {}", student);
         logger.info("passport -> {}", student.getPassport());
     }
@@ -43,6 +44,22 @@ class StudentRepositoryTest {
         Passport passport = em.find(Passport.class, 40001);
         logger.info("passport -> {}", passport);
         logger.info("student -> {}", passport.getStudent());
+    }
+
+    @Test
+    @Transactional
+    void retrieve_student_and_courses() {
+        Student student = em.find(Student.class, 20001);
+        logger.info("student -> {}", student);
+        logger.info("courses -> {}", student.getCourses());
+    }
+
+    @Test
+    @Transactional
+    void retrieve_course_and_students() {
+        Course course = em.find(Course.class, 10001);
+        logger.info("course -> {}", course);
+        logger.info("students -> {}", course.getStudents());
     }
 
 }

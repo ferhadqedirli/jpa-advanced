@@ -46,7 +46,7 @@ public class StudentRepository {
 
     public void someOperationToUnderstandPersistenceContext() {
         //Database operation 1 - Retrieve Student
-        Student student = entityManager.find(Student.class, 2);
+        Student student = entityManager.find(Student.class, 20002);
         //Persistence Context(student)
 
         //Database operation 2 - Retrieve Passport
