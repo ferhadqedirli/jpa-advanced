@@ -1,6 +1,8 @@
 package com.example.demohibernate.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Student {
@@ -13,6 +15,9 @@ public class Student {
 
     @OneToOne(fetch = FetchType.LAZY)
     private Passport passport;
+
+    @ManyToMany
+    private final List<Course> courses = new ArrayList<>();
 
     protected Student() {
     }
@@ -48,6 +53,14 @@ public class Student {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void addCourse(Course course) {
+        this.courses.add(course);
     }
 
     @Override
