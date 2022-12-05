@@ -52,4 +52,18 @@ class JPQLTest {
         logger.info("Courses without students -> {}", resultList);
     }
 
+    @Test
+    void jpql_courses_with_more_students() {
+        TypedQuery<Course> query = em.createQuery("select c from Course c where c.students.size >= 2", Course.class);
+        List<Course> resultList = query.getResultList();
+        logger.info("Courses with more students -> {}", resultList);
+    }
+
+    @Test
+    void jpql_courses_ordered_by_students() {
+        TypedQuery<Course> query = em.createQuery("select c from Course c order by c.students.size desc", Course.class);
+        List<Course> resultList = query.getResultList();
+        logger.info("Courses with more students -> {}", resultList);
+    }
+
 }
