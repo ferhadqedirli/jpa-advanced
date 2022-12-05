@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -44,6 +43,13 @@ class JPQLTest {
         TypedQuery<Course> query = em.createNamedQuery("query_get_100_step_courses", Course.class);
         List<Course> resultList = query.getResultList();
         logger.info("select c from Course c where c.name like '%100 Steps' -> {}", resultList);
+    }
+
+    @Test
+    void jpql_courses_without_students() {
+        TypedQuery<Course> query = em.createQuery("select c from Course c where c.students is empty", Course.class);
+        List<Course> resultList = query.getResultList();
+        logger.info("Courses without students -> {}", resultList);
     }
 
 }
