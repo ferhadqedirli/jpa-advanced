@@ -13,6 +13,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
@@ -34,5 +35,19 @@ class CriteriaQueryTest {
         TypedQuery<Course> query = em.createQuery(criteriaQuery.select(root));
         List<Course> resultList = query.getResultList();
         logger.info("Result -> {}", resultList);
+    }
+
+    @Test
+    void all_courses_having_100_steps() {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Course> criteriaQuery = cb.createQuery(Course.class);
+
+        Root<Course> root = criteriaQuery.from(Course.class);
+
+        Predicate like = cb.like(root.get("name"), "%100 steps");
+        criteriaQuery.where(like);
+        TypedQuery<Course> query = em.createQuery(criteriaQuery.select(root));
+        List<Course> resultList = query.getResultList();
+        logger.info("select c from Course c where c.name like '%100 Steps' -> {}", resultList);
     }
 }
