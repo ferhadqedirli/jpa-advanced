@@ -9,12 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.List;
 
 @SpringBootTest(classes = DemoHibernateApplication.class)
@@ -63,5 +59,33 @@ class CriteriaQueryTest {
         TypedQuery<Course> query = em.createQuery(criteriaQuery.select(root));
         List<Course> resultList = query.getResultList();
         logger.info("select c from Course c where students is empty -> {}", resultList);
+    }
+
+    @Test
+    void join() {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Course> criteriaQuery = cb.createQuery(Course.class);
+
+        Root<Course> root = criteriaQuery.from(Course.class);
+
+        root.join("students");
+
+        TypedQuery<Course> query = em.createQuery(criteriaQuery.select(root));
+        List<Course> resultList = query.getResultList();
+        logger.info("Join result -> {}", resultList);
+    }
+
+    @Test
+    void left_join() {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Course> criteriaQuery = cb.createQuery(Course.class);
+
+        Root<Course> root = criteriaQuery.from(Course.class);
+
+        root.join("students", JoinType.LEFT);
+
+        TypedQuery<Course> query = em.createQuery(criteriaQuery.select(root));
+        List<Course> resultList = query.getResultList();
+        logger.info("Join result -> {}", resultList);
     }
 }
