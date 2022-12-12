@@ -50,4 +50,18 @@ class CriteriaQueryTest {
         List<Course> resultList = query.getResultList();
         logger.info("select c from Course c where c.name like '%100 Steps' -> {}", resultList);
     }
+
+    @Test
+    void all_courses_without_students() {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Course> criteriaQuery = cb.createQuery(Course.class);
+
+        Root<Course> root = criteriaQuery.from(Course.class);
+
+        Predicate isEmpty = cb.isEmpty(root.get("students"));
+        criteriaQuery.where(isEmpty);
+        TypedQuery<Course> query = em.createQuery(criteriaQuery.select(root));
+        List<Course> resultList = query.getResultList();
+        logger.info("select c from Course c where students is empty -> {}", resultList);
+    }
 }
