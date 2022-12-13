@@ -64,4 +64,9 @@ class CourseSpringDataRepositoryTest {
         Page<Course> secondPage = repository.findAll(secondPageable);
         logger.info("Second Page -> {}", secondPage.getContent());
     }
+
+    @Test
+    void findByName() {
+        logger.info("FindByName -> {}", repository.findAllByName("JPA in 50 steps"));
+    }
 }
