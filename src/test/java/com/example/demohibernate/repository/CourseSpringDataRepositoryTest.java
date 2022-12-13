@@ -2,17 +2,15 @@ package com.example.demohibernate.repository;
 
 import com.example.demohibernate.DemoHibernateApplication;
 import com.example.demohibernate.entity.Course;
-import com.example.demohibernate.entity.Review;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.domain.Sort;
 
-import javax.persistence.EntityManager;
 
+import java.util.Collections;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,9 +22,6 @@ class CourseSpringDataRepositoryTest {
 
     @Autowired
     CourseSpringDataRepository repository;
-
-    @Autowired
-    EntityManager em;
 
     @Test
     void findById_coursePresent() {
@@ -47,5 +42,12 @@ class CourseSpringDataRepositoryTest {
         repository.save(course);
 
         logger.info("Courses -> {}", repository.findAll());
+    }
+
+    @Test
+    void sort() {
+        Sort sort = Sort.by("name").descending();
+
+        logger.info("Sorted Courses -> {}", repository.findAll(sort));
     }
 }
