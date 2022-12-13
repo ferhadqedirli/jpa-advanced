@@ -34,6 +34,16 @@ class CourseRepositoryTest {
     }
 
     @Test
+    @Transactional
+    void findById_firstLevelCacheDemo() {
+        Course course = repository.findById(10001);
+        logger.info("First Course Retrieved -> {}", course);
+
+        Course course1 = repository.findById(10001);
+        logger.info("First Course Retrieved again -> {}", course1);
+    }
+
+    @Test
     @DirtiesContext//reset data after testing
     void deleteById_basic() {
         repository.deleteById(10001);
