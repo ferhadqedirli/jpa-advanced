@@ -1,5 +1,6 @@
 package com.example.demohibernate.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -32,6 +33,7 @@ public class Course {
     private final List<Review> reviews = new ArrayList<>();
 
     @ManyToMany(mappedBy = "courses")
+    @JsonIgnore
     private final List<Student> students = new ArrayList<>();
 
     protected Course() {
