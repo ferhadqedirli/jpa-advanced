@@ -39,4 +39,13 @@ class CourseSpringDataRepositoryTest {
         Optional<Course> courseOptional = repository.findById(20001);
         assertFalse(courseOptional.isPresent());
     }
+
+    @Test
+    void playingAroundWithSpringDataRepository() {
+        Course course = repository.save(new Course("Microservices in 100 Steps"));
+        course.setName("Microservices in 100 Steps - Updated");
+        repository.save(course);
+
+        logger.info("Courses -> {}", repository.findAll());
+    }
 }
