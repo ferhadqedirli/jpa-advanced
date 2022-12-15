@@ -2,7 +2,9 @@ package com.example.demohibernate.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -16,6 +18,8 @@ import java.util.List;
         @NamedQuery(name = "query_get_100_step_courses", query = "select c from Course c where c.name like '%100 Steps'")
 })
 @Cacheable
+@SQLDelete(sql = "update course set is_deleted = true where id = ?")//soft delete
+@Where(clause = "is_deleted = false")//select zamani is_deleted = false olan
 public class Course {
     @Id
     @GeneratedValue
@@ -36,6 +40,8 @@ public class Course {
     @ManyToMany(mappedBy = "courses")
     @JsonIgnore
     private final List<Student> students = new ArrayList<>();
+
+    private boolean isDeleted;
 
     protected Course() {
     }
