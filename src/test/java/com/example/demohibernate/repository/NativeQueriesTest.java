@@ -24,14 +24,14 @@ class NativeQueriesTest {
 
     @Test
     void native_queries_basic() {
-        Query query = em.createNativeQuery("select * from course", Course.class);
+        Query query = em.createNativeQuery("select * from course where is_deleted = 0", Course.class);
         List resultList = query.getResultList();
         logger.info("select * from course -> {}", resultList);
     }
 
     @Test
     void native_queries_with_parameter() {
-        Query query = em.createNativeQuery("select * from course where id = ?", Course.class);
+        Query query = em.createNativeQuery("select * from course where id = ? and is_deleted = 0", Course.class);
         query.setParameter(1, 10001);
         List resultList = query.getResultList();
         logger.info("select * from course where id = ? -> {}", resultList);
@@ -39,7 +39,7 @@ class NativeQueriesTest {
 
     @Test
     void native_queries_with_named_parameter() {
-        Query query = em.createNativeQuery("select * from course where id = :id", Course.class);
+        Query query = em.createNativeQuery("select * from course where id = :id and is_deleted = 0", Course.class);
         query.setParameter("id", 10003);
         List resultList = query.getResultList();
         logger.info("select * from course where id = :id -> {}", resultList);

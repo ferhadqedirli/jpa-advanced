@@ -55,6 +55,11 @@ public class Course {
         this.name = name;
     }
 
+    @PreRemove
+    private void preRemove() {
+        this.isDeleted = true;
+    }
+
     public Integer getId() {
         return id;
     }
