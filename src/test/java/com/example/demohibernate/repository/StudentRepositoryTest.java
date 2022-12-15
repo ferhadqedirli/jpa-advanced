@@ -1,6 +1,7 @@
 package com.example.demohibernate.repository;
 
 import com.example.demohibernate.DemoHibernateApplication;
+import com.example.demohibernate.entity.Address;
 import com.example.demohibernate.entity.Course;
 import com.example.demohibernate.entity.Passport;
 import com.example.demohibernate.entity.Student;
@@ -60,6 +61,16 @@ class StudentRepositoryTest {
         Course course = em.find(Course.class, 10001);
         logger.info("course -> {}", course);
         logger.info("students -> {}", course.getStudents());
+    }
+
+    @Test
+    @Transactional
+    void set_address_details() {
+        Student student = em.find(Student.class, 20001);
+        student.setAddress(new Address("Yasamal", "2-ci Alatava", "Baku"));
+        em.flush();
+        logger.info("student -> {}", student);
+        logger.info("address -> {}", student.getAddress());
     }
 
 }
