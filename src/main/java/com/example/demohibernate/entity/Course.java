@@ -96,6 +96,14 @@ public class Course {
         this.students.add(student);
     }
 
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
     @Override
     public String toString() {
         return "\nCourse{" +

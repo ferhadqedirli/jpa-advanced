@@ -1,9 +1,6 @@
 package com.example.demohibernate.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class Review {
@@ -11,7 +8,8 @@ public class Review {
     @GeneratedValue
     private Integer id;
 
-    private String rating;
+    @Enumerated(EnumType.STRING)
+    private ReviewRating rating;
 
     private String description;
 
@@ -21,13 +19,13 @@ public class Review {
     protected Review() {
     }
 
-    public Review(Integer id, String rating, String description) {
+    public Review(Integer id, ReviewRating rating, String description) {
         this.id = id;
         this.rating = rating;
         this.description = description;
     }
 
-    public Review(String rating, String description) {
+    public Review(ReviewRating rating, String description) {
         this.rating = rating;
         this.description = description;
     }
@@ -40,11 +38,11 @@ public class Review {
         this.id = id;
     }
 
-    public String getRating() {
+    public ReviewRating getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
+    public void setRating(ReviewRating rating) {
         this.rating = rating;
     }
 
